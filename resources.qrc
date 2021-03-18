@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/apple_bite.wav</file>
+        <file>assets/apple.png</file>
+        <file>assets/dot.png</file>
+        <file>assets/head.png</file>
+        <file>assets/snakehit.wav</file>
+        <file>assets/snake.ico</file>
+    </qresource>
+</RCC>
