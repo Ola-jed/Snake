@@ -216,7 +216,7 @@ void Snake::checkCollision()
 
 void Snake::timerEvent(QTimerEvent *e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
     if (inGame)
     {
         checkApple();
