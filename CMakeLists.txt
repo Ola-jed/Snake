@@ -13,7 +13,7 @@ else()
 endif()
 
 set(REQUIRED_LIBS Core Gui Widgets Sql Multimedia)
-set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Multimedia)
+set(REQUIRED_LIBS_QUALIFIED Qt${QT_VERSION}::Core Qt${QT_VERSION}::Gui Qt${QT_VERSION}::Widgets Qt${QT_VERSION}::Sql Qt${QT_VERSION}::Multimedia)
 
 add_executable(${PROJECT_NAME} src/main.cpp src/style.hpp src/scoremanager.cpp src/scoremanager.hpp src/snake.cpp src/snake.hpp resources.qrc)
 
