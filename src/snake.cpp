@@ -119,7 +119,7 @@ void Snake::paintEvent(QPaintEvent *e)
 
 void Snake::doDrawing()
 {
-    QPainter qp(this);
+    QPainter qp{this};
     if (inGame)
     {
         qp.drawImage(appleAbsciss, appleOrdinate, apple);
