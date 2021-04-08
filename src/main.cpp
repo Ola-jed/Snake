@@ -2,9 +2,10 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setApplicationName("Snake");
     QCoreApplication::setOrganizationName("Snake");
+    QApplication a(argc, argv);
     Snake w;
     w.show();
     return QApplication::exec();
