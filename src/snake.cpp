@@ -21,7 +21,7 @@ void Snake::initializeComponents()
     scores = new QPushButton("Scores",this);
 }
 
-// Layout managment
+// Layout management
 void Snake::applyLayout()
 {
     auto *lay = new QGridLayout(this);
@@ -33,7 +33,7 @@ void Snake::applyLayout()
     setLayout(lay);
 }
 
-// Applying style to the buttons.
+// Applying style to the window and to the buttons
 void Snake::applyStyle()
 {
     setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,size(),QGuiApplication::primaryScreen()->availableGeometry()));
