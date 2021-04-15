@@ -1,13 +1,13 @@
 #ifndef SCOREMANAGER_HPP
 #define SCOREMANAGER_HPP
 
-#include <QSqlDatabase>
+#include <QList>
+#include <QVariant>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QSqlResult>
 #include <QSqlDriver>
-#include <QVariant>
-#include <QSqlError>
-#include <QList>
+#include <QSqlDatabase>
 
 class ScoreManager
 {

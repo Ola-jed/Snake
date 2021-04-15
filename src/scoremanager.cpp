@@ -23,7 +23,7 @@ QList<int> ScoreManager::selectAll()
     return scoresLoaded;
 }
 
-// Select the highest score in he database.
+// Select the highest score in the database.
 int ScoreManager::selectBestScore()
 {
     auto queryBest = myDb.exec("SELECT MAX(Score) FROM Scores");

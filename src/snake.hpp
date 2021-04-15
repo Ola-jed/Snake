@@ -1,23 +1,23 @@
 #ifndef SNAKE_HPP
 #define SNAKE_HPP
 
-#include "scoremanager.hpp"
 #include "style.hpp"
+#include "scoremanager.hpp"
 #include <array>
-#include <QDesktopWidget>
-#include <QScreen>
-#include <QApplication>
-#include <QStyle>
-#include <QTableWidget>
-#include <QPushButton>
-#include <QImage>
-#include <QKeyEvent>
-#include <QPainter>
 #include <QTime>
-#include <QRandomGenerator>
-#include <QMessageBox>
+#include <QStyle>
 #include <QSound>
+#include <QImage>
+#include <QScreen>
+#include <QPainter>
+#include <QKeyEvent>
+#include <QMessageBox>
 #include <QGridLayout>
+#include <QPushButton>
+#include <QTableWidget>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QRandomGenerator>
 
 class Snake : public QWidget
 {
@@ -68,20 +68,20 @@ class Snake : public QWidget
         bool inGame {true};
 
         // Functions
+        void move();
+        void moveUp();
+        void moveDown();
+        void moveLeft();
+        void moveRight();
         void startGame();
         void locateApple();
         void checkApple();
         void checkCollision();
-        void move();
         void doDrawing();
         void gameOver();
         void initializeComponents();
         void applyLayout();
         void applyStyle();
-        void moveUp();
-        void moveDown();
-        void moveLeft();
-        void moveRight();
 
         ScoreManager scoreManager{};
 
