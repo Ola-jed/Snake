@@ -76,11 +76,11 @@ void Snake::onScores()
     table->setColumnWidth(0,columnWidth);
     table->setHorizontalHeaderItem(0,new QTableWidgetItem("Scores"));
     int i{0};
-            foreach(auto temp, listScore)
-        {
-            table->setItem(i,0,new QTableWidgetItem(QString::number(temp),0));
-            i++;
-        }
+    foreach(const auto &temp, listScore)
+    {
+        table->setItem(i,0,new QTableWidgetItem(QString::number(temp),0));
+        i++;
+    }
     table->setEditTriggers(QAbstractItemView::NoEditTriggers);
     table->show();
 }
