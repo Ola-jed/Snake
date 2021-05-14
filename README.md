@@ -5,7 +5,7 @@ A game based on the snake game and written in c++ with qt
 ```bash
 # Compile in debug mode
 git clone https://github.com/Ola-jed/Snake.git
-cd QImageViewer
+cd Snake
 cmake .
 make 
 ./Snake

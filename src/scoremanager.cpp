@@ -27,6 +27,8 @@ QList<int> ScoreManager::selectAll()
 int ScoreManager::selectBestScore()
 {
     auto queryBest = myDb.exec("SELECT MAX(Score) FROM Scores");
+    // We want to be on a valid record
+    queryBest.first();
     auto const best{queryBest.value(0).toInt()};
     return best;
 }
