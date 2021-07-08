@@ -16,7 +16,7 @@ endif()
 set(REQUIRED_LIBS Core Gui Widgets Sql Multimedia)
 set(REQUIRED_LIBS_QUALIFIED Qt${QT_VERSION}::Core Qt${QT_VERSION}::Gui Qt${QT_VERSION}::Widgets Qt${QT_VERSION}::Sql Qt${QT_VERSION}::Multimedia)
 
-add_executable(${PROJECT_NAME} src/main.cpp src/style.hpp src/scoremanager.cpp src/scoremanager.hpp src/snake.cpp src/snake.hpp resources.qrc)
+add_executable(${PROJECT_NAME} src/main.cpp include/style.hpp src/scoremanager.cpp include/scoremanager.hpp src/snake.cpp include/snake.hpp resources.qrc)
 
 if (NOT CMAKE_PREFIX_PATH)
     message(WARNING "CMAKE_PREFIX_PATH is not defined, you may need to set it "
@@ -29,6 +29,6 @@ endif()
 if ( MSVC )
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /W4")
 endif()
-
+include_directories(${Snake_SOURCE_DIR}/include)
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})
