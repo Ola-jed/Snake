@@ -6,43 +6,44 @@ Snake::Snake(QWidget *parent)
     initializeComponents();
     applyLayout();
     applyStyle();
-    setFixedSize(BOARD_WIDTH,BOARD_HEIGHT);
-    connect(easy,&QPushButton::clicked,this,&Snake::OnEasyGame);
-    connect(medium,&QPushButton::clicked,this,&Snake::OnMediumGame);
-    connect(hard,&QPushButton::clicked,this,&Snake::OnHardGame);
-    connect(scores,&QPushButton::clicked,this,&Snake::onScores);
+    setFixedSize(BOARD_WIDTH, BOARD_HEIGHT);
+    connect(easy, &QPushButton::clicked, this, &Snake::OnEasyGame);
+    connect(medium, &QPushButton::clicked, this, &Snake::OnMediumGame);
+    connect(hard, &QPushButton::clicked, this, &Snake::OnHardGame);
+    connect(scores, &QPushButton::clicked, this, &Snake::onScores);
 }
 
 void Snake::initializeComponents()
 {
-    easy   = new QPushButton("Easy",this);
-    medium = new QPushButton("Medium",this);
-    hard   = new QPushButton("Hard",this);
-    scores = new QPushButton("Scores",this);
+    easy   = new QPushButton("Easy", this);
+    medium = new QPushButton("Medium", this);
+    hard   = new QPushButton("Hard", this);
+    scores = new QPushButton("Scores", this);
 }
 
 // Layout management
 void Snake::applyLayout()
 {
     auto *lay = new QGridLayout(this);
-    lay->setContentsMargins(0,0,0,0);
-    lay->addWidget(easy,0,0);
-    lay->addWidget(medium,0,1);
-    lay->addWidget(hard,1,0);
-    lay->addWidget(scores,1,1);
+    lay->setContentsMargins(0, 0, 0, 0);
+    lay->addWidget(easy, 0, 0);
+    lay->addWidget(medium, 0, 1);
+    lay->addWidget(hard, 1, 0);
+    lay->addWidget(scores, 1, 1);
     setLayout(lay);
 }
 
 // Applying style to the window and to the buttons
 void Snake::applyStyle()
 {
-    setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,size(),QGuiApplication::primaryScreen()->availableGeometry()));
+    setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter, size(),
+                                    QGuiApplication::primaryScreen()->availableGeometry()));
     setWindowIcon(QIcon(":assets/snake.ico"));
     setWindowTitle("Snake");
-    easy->setFixedSize(100,100);
-    medium->setFixedSize(100,100);
-    hard->setFixedSize(100,100);
-    scores->setFixedSize(100,100);
+    easy->setFixedSize(100, 100);
+    medium->setFixedSize(100, 100);
+    hard->setFixedSize(100, 100);
+    scores->setFixedSize(100, 100);
     setStyleSheet(STYLE);
 }
 
@@ -67,18 +68,18 @@ void Snake::OnHardGame()
 
 void Snake::onScores()
 {
-    auto const listScore {scoreManager.selectAll()};
-    auto *table  = new QTableWidget(listScore.size(),1);
+    auto const listScore{scoreManager.selectAll()};
+    auto       *table = new QTableWidget(listScore.size(), 1);
     table->resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
     table->setWindowTitle("History");
-    table->setFixedSize(width(),height());
-    const int columnWidth {table->width()};
-    table->setColumnWidth(0,columnWidth);
-    table->setHorizontalHeaderItem(0,new QTableWidgetItem("Scores"));
-    int i{0};
-    foreach(const auto &temp, listScore)
+    table->setFixedSize(width(), height());
+    const int columnWidth{table->width()};
+    table->setColumnWidth(0, columnWidth);
+    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Scores"));
+    int             i{0};
+    for (const auto &temp: listScore)
     {
-        table->setItem(i,0,new QTableWidgetItem(QString::number(temp),0));
+        table->setItem(i, 0, new QTableWidgetItem(QString::number(temp), 0));
         i++;
     }
     table->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -94,9 +95,9 @@ void Snake::startGame()
     delete scores;
     setStyleSheet("background-color:#000;");
     dots = NUMBER_OF_DOTS_AT_START;
-    for(int i{0};i<NUMBER_OF_DOTS_AT_START;i++)
+    for (int i{0}; i < NUMBER_OF_DOTS_AT_START; i++)
     {
-        x[i] = STARTING_POSITION - (i*10);
+        x[i] = STARTING_POSITION - (i * 10);
         y[i] = STARTING_POSITION;
     }
     locateApple();
@@ -105,9 +106,9 @@ void Snake::startGame()
 
 void Snake::locateApple()
 {
-    int r {QRandomGenerator::global()->bounded(10,30)};
+    int r{QRandomGenerator::global()->bounded(10, 30)};
     appleAbsciss  = (r * DOT_SIZE);
-    r = QRandomGenerator::global()->bounded(10,30);
+    r             = QRandomGenerator::global()->bounded(10, 30);
     appleOrdinate = (r * DOT_SIZE);
 }
 
@@ -125,7 +126,7 @@ void Snake::doDrawing()
         qp.drawImage(appleAbsciss, appleOrdinate, apple);
         for (int z{0}; z < dots; z++)
         {
-            qp.drawImage(x[z], y[z],(z == 0) ? head : dot);
+            qp.drawImage(x[z], y[z], (z == 0) ? head : dot);
         }
     }
     else
@@ -138,13 +139,13 @@ void Snake::gameOver()
 {
     QSound::play(":assets/snakehit.wav");
     scoreManager.insertScore(dots - NUMBER_OF_DOTS_AT_START);
-    if(dots >= scoreManager.selectBestScore())
+    if (dots >= scoreManager.selectBestScore())
     {
-        QMessageBox::information(this,"Game over","Best score record!!! : "+QString::number(dots));
+        QMessageBox::information(this, "Game over", "Best score record!!! : " + QString::number(dots));
     }
     else
     {
-        QMessageBox::critical(this,"Game Over","Game Over : Score ("+QString::number(dots)+")");
+        QMessageBox::critical(this, "Game Over", "Game Over : Score (" + QString::number(dots) + ")");
     }
     qApp->quit();
 }
@@ -155,15 +156,15 @@ void Snake::checkApple()
     if ((x[0] == appleAbsciss) && (y[0] == appleOrdinate))
     {
         QSound::play(":assets/apple_bite.wav");
-        switch(level)
+        switch (level)
         {
             case EASY :
                 break;
             case MEDIUM:
-                timerId = startTimer((10-MEDIUM)*75);
+                timerId = startTimer((10 - MEDIUM) * 75);
                 break;
             case HARD:
-                timerId = startTimer((10-HARD)*75);
+                timerId = startTimer((10 - HARD) * 75);
                 break;
             default:
                 break;
@@ -200,7 +201,7 @@ void Snake::move()
 
 void Snake::checkCollision()
 {
-    for (int z {dots}; z > 0; z--)
+    for (int z{dots}; z > 0; z--)
     {
         if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z]))
         {
@@ -208,7 +209,7 @@ void Snake::checkCollision()
         }
     }
     inGame = !((x[0] >= BOARD_WIDTH) || (x[0] < 0) || (y[0] >= BOARD_HEIGHT) || (y[0] < 0)) && inGame;
-    if(!inGame)
+    if (!inGame)
     {
         killTimer(timerId);
     }
@@ -228,15 +229,27 @@ void Snake::timerEvent(QTimerEvent *e)
 
 void Snake::keyPressEvent(QKeyEvent *e)
 {
-    const int key {e->key()};
+    const int  key{e->key()};
     const bool leftDirectionPossible{(key == Qt::Key_Left) && (!rightDirection)};
     const bool rightDirectionPossible{(key == Qt::Key_Right) && (!leftDirection)};
     const bool upDirectionPossible{(key == Qt::Key_Up) && (!downDirection)};
     const bool downDirectionPossible{(key == Qt::Key_Down) && (!upDirection)};
-    if (leftDirectionPossible)  moveLeft();
-    if (rightDirectionPossible) moveRight();
-    if (upDirectionPossible)    moveUp();
-    if (downDirectionPossible)  moveDown();
+    if (leftDirectionPossible)
+    {
+        moveLeft();
+    }
+    if (rightDirectionPossible)
+    {
+        moveRight();
+    }
+    if (upDirectionPossible)
+    {
+        moveUp();
+    }
+    if (downDirectionPossible)
+    {
+        moveDown();
+    }
     QWidget::keyPressEvent(e);
 }
 
@@ -270,4 +283,5 @@ void Snake::moveRight()
 }
 
 Snake::~Snake()
-{}
+{
+}

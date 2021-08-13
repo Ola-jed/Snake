@@ -21,74 +21,75 @@
 
 class Snake : public QWidget
 {
-    Q_OBJECT
+Q_OBJECT
 
-    public:
-        explicit Snake(QWidget *parent = nullptr);
-        ~Snake();
+public:
+    explicit Snake(QWidget *parent = nullptr);
+    ~Snake();
 
-    protected:
-        void paintEvent(QPaintEvent *) override;
-        void timerEvent(QTimerEvent *) override;
-        void keyPressEvent(QKeyEvent *) override;
+protected:
+    void paintEvent(QPaintEvent *) override;
+    void timerEvent(QTimerEvent *) override;
+    void keyPressEvent(QKeyEvent *) override;
 
-    private:
-        QPushButton *easy;
-        QPushButton *medium;
-        QPushButton *hard;
-        QPushButton *scores;
+private:
+    QPushButton *easy;
+    QPushButton *medium;
+    QPushButton *hard;
+    QPushButton *scores;
 
-        const QImage dot {":assets/dot.png"};
-        const QImage head {":assets/head.png"};
-        const QImage apple {":assets/apple.png"};
+    const QImage dot{":assets/dot.png"};
+    const QImage head{":assets/head.png"};
+    const QImage apple{":assets/apple.png"};
 
-        static const int BOARD_WIDTH {500};
-        static const int BOARD_HEIGHT {500};
-        static const int DOT_SIZE {10};
-        static const int ALL_DOTS {900};
-        static const int NUMBER_OF_DOTS_AT_START {3};
-        static const int STARTING_POSITION{50};
-        static const int EASY {0};
-        static const int MEDIUM {1};
-        static const int HARD {2};
-        const int RANDOM_POSITION {QRandomGenerator::global()->bounded(10,30)};
+    static constexpr int BOARD_WIDTH{500};
+    static constexpr int BOARD_HEIGHT{500};
+    static constexpr int DOT_SIZE{10};
+    static constexpr int ALL_DOTS{900};
+    static constexpr int NUMBER_OF_DOTS_AT_START{3};
+    static constexpr int STARTING_POSITION{50};
+    static constexpr int EASY{0};
+    static constexpr int MEDIUM{1};
+    static constexpr int HARD{2};
+    const int        RANDOM_POSITION{QRandomGenerator::global()->bounded(10, 30)};
 
-        int delay {100};
-        int timerId;
-        int level;
-        int dots {NUMBER_OF_DOTS_AT_START};
-        int appleAbsciss;
-        int appleOrdinate;
-        std::array<int,ALL_DOTS> x;
-        std::array<int,ALL_DOTS> y;
-        bool leftDirection {false};
-        bool rightDirection {true};
-        bool upDirection {false};
-        bool downDirection {false};
-        bool inGame {true};
+    int                       delay{100};
+    int                       timerId;
+    int                       level;
+    int                       dots{NUMBER_OF_DOTS_AT_START};
+    int                       appleAbsciss;
+    int                       appleOrdinate;
+    std::array<int, ALL_DOTS> x;
+    std::array<int, ALL_DOTS> y;
+    bool                      leftDirection{false};
+    bool                      rightDirection{true};
+    bool                      upDirection{false};
+    bool                      downDirection{false};
+    bool                      inGame{true};
 
-        // Functions
-        void move();
-        void moveUp();
-        void moveDown();
-        void moveLeft();
-        void moveRight();
-        void startGame();
-        void locateApple();
-        void checkApple();
-        void checkCollision();
-        void doDrawing();
-        void gameOver();
-        void initializeComponents();
-        void applyLayout();
-        void applyStyle();
+    // Functions
+    void move();
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
+    void startGame();
+    void locateApple();
+    void checkApple();
+    void checkCollision();
+    void doDrawing();
+    void gameOver();
+    void initializeComponents();
+    void applyLayout();
+    void applyStyle();
 
-        ScoreManager scoreManager{};
+    ScoreManager scoreManager{};
 
-    private slots:
-        void OnEasyGame();
-        void OnMediumGame();
-        void OnHardGame();
-        void onScores();
+private slots:
+    void OnEasyGame();
+    void OnMediumGame();
+    void OnHardGame();
+    void onScores();
 };
+
 #endif // SNAKE_HPP
